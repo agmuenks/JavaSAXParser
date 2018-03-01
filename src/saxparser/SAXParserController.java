@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,13 +57,17 @@ public class SAXParserController implements Initializable {
         textArea.appendText(node.getName() + ": " + node.getContent() + "\n");
         
         
-        if (node.getAttributes().getLength() != 0){
-            Attributes attributes = node.getAttributes();
-            int length = attributes.getLength();
-            for (int i = 0; i < length; i++){
-                textArea.appendText(attributes.getLocalName(i) + ": " + attributes.getValue(i) + "\n");
-                System.out.println(attributes.getLocalName(i) + ": " + attributes.getValue(i));
+        if (!node.getAttributes().isEmpty()){
+            HashMap<String, String> attributes = node.getAttributes();
+            for(Object entry : attributes.entrySet()){
+                HashMap.Entry e = (HashMap.Entry) entry;
+
+                Object key = e.getKey();
+                Object value = e.getValue();
+
+                textArea.appendText(key + ": " + value + "\n");
             }
+
         }
         
         

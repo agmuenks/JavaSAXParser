@@ -17,7 +17,8 @@ public class XMLNode {
     private String name = "";
     public String content = "";
     public HashMap<String, ArrayList<XMLNode>> properties = new HashMap<String, ArrayList<XMLNode>>();
-    private Attributes attributes;
+    //private Attributes attributes;
+    public HashMap<String, String> attributes = new HashMap<String, String>();
     
     public XMLNode(){
         
@@ -27,9 +28,9 @@ public class XMLNode {
         this.name = name;
     }
     
-    public void setAttributes(Attributes attributes){
-        this.attributes = attributes;
-    }
+//    public void setAttributes(HashMap attributes){
+//        this.attributes = attributes;
+//    }
     
     public String getName(){
         return name;
@@ -39,7 +40,7 @@ public class XMLNode {
         return content;
     }
     
-    public Attributes getAttributes(){
+    public HashMap<String, String> getAttributes(){
         return attributes;
     }
 }

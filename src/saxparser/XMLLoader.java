@@ -35,7 +35,7 @@ public class XMLLoader {
                 
                 @Override
                 public void startDocument(){
-                    //root = null;
+                    
                     xmlRoot.setRoot(null);
                     
                     stack = new ArrayList<>();
@@ -43,13 +43,15 @@ public class XMLLoader {
                 
                 @Override
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-                    System.out.println("start");
+                
                     XMLNode node = new XMLNode();
                     node.setName(qName);
-                    System.out.println(qName);
-                    node.setAttributes(attributes);
+                    for (int i = 0; i < attributes.getLength(); i++){
+                        node.attributes.put(attributes.getLocalName(i), attributes.getValue(i));
+                    }
+                    
                     stack.add(node);
-                   
+            
                     
                     if(currentNode != null){
                         if (currentNode.properties.get(localName) != null){
