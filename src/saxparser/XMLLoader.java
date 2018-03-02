@@ -7,6 +7,7 @@ package saxparser;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -46,21 +47,23 @@ public class XMLLoader {
                 
                     XMLNode node = new XMLNode();
                     node.setName(qName);
+                    HashMap<String, String> attributesHashMap = new HashMap<>();
                     for (int i = 0; i < attributes.getLength(); i++){
-                        node.attributes.put(attributes.getLocalName(i), attributes.getValue(i));
+                        attributesHashMap.put(attributes.getLocalName(i), attributes.getValue(i));
                     }
+                    node.setAttributes(attributesHashMap);
                     
                     stack.add(node);
             
                     
                     if(currentNode != null){
-                        if (currentNode.properties.get(localName) != null){
-                            currentNode.properties.get(localName).add(node);
+                        if (currentNode.getProperties().get(localName) != null){
+                            currentNode.getProperties().get(localName).add(node);
                         }
                         else{
                             ArrayList<XMLNode> nodeList = new ArrayList<>();
                             nodeList.add(node);
-                            currentNode.properties.put(localName, nodeList);
+                            currentNode.getProperties().put(localName, nodeList);
                         }
                     }
                     currentNode = node;
@@ -89,7 +92,7 @@ public class XMLLoader {
                 public void characters(char ch[], int start, int length) throws SAXException {
                     
                     if (currentNode != null){
-                        currentNode.content += new String(ch, start, length);
+                        currentNode.concatContent( new String(ch, start, length) );
                         
                     }
                 }

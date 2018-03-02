@@ -15,10 +15,9 @@ import org.xml.sax.Attributes;
  */
 public class XMLNode {
     private String name = "";
-    public String content = "";
-    public HashMap<String, ArrayList<XMLNode>> properties = new HashMap<String, ArrayList<XMLNode>>();
-    //private Attributes attributes;
-    public HashMap<String, String> attributes = new HashMap<String, String>();
+    private String content = "";
+    private HashMap<String, ArrayList<XMLNode>> properties = new HashMap<String, ArrayList<XMLNode>>();
+    private HashMap<String, String> attributes = new HashMap<String, String>();
     
     public XMLNode(){
         
@@ -28,9 +27,17 @@ public class XMLNode {
         this.name = name;
     }
     
-//    public void setAttributes(HashMap attributes){
-//        this.attributes = attributes;
-//    }
+    public void concatContent (String content){
+        this.content += content;
+    }
+    
+    public void setProperties (HashMap<String, ArrayList<XMLNode>> properties){
+        this.properties = properties;
+    }
+    
+    public void setAttributes(HashMap<String, String> attributes){
+        this.attributes = attributes;
+    }
     
     public String getName(){
         return name;
@@ -38,6 +45,10 @@ public class XMLNode {
     
     public String getContent(){
         return content;
+    }
+    
+    public HashMap<String, ArrayList<XMLNode>> getProperties(){
+        return properties;
     }
     
     public HashMap<String, String> getAttributes(){

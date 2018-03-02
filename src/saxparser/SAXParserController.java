@@ -71,9 +71,9 @@ public class SAXParserController implements Initializable {
         }
         
         
-        if (!node.properties.isEmpty()){
+        if (!node.getProperties().isEmpty()){
 
-            ArrayList<XMLNode> list = node.properties.get("");
+            ArrayList<XMLNode> list = node.getProperties().get("");
             for (int i = 0; i < list.size(); i++){
                 printDOM(list.get(i));
             }
